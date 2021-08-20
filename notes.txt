@@ -1,0 +1,4 @@
+August 19, 2021
+
+sudo apt-get update && sudo apt-get upgrade
+sudo rpi-update
