@@ -1,20 +1,21 @@
-August 19, 2021
+August 20, 2021
 
-# From Rick and others
-sudo apt-get update
-sudo apt-get upgrade
-sudo rpi-update
-sudo apt install raspberrypi-kernel-headers git bc bison flex libssl-dev make
+Linux kernel and driver functions have changed over time breaking much
+of the example code.
 
-cd /opt/git/RPDriver
-make
-sudo insmod hello.ko
-sudo rmmod hello.ko
+Firefox LinuxDriverDev->KernelInfo has information on some of the changes.
 
-### Old way that worked with: ###
-#  Makefile
-   obj-m := hello.o
-# hello.c and Makefile are from: https://raspberrypi.stackexchange.com/questions/39845/how-compile-a-loadable-kernel-module-without-recompiling-kernel
-make -C /lib/modules/$(uname -r)/build M=$(pwd) modules
-sudo insmod hello.ko
-sudo rmmod hello.ko
+Also it seems the cleaner way to init modules is more like
+this. Functions have specific special modifiers __init and
+__exit. Also the function returns are different. See simple for older
+example that works but seems touchy and does not work in all cases.
+
+#include <linux/init.h>
+#include <linux/module.h>
+#include <linux/kernel.h>
+
+static int __init hello_init(void) { return 0; }
+static void __exit hello_exit(void) {}
+
+module_init(hello_init);
+module_exit(hello_exit);
