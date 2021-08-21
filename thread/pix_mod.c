@@ -192,13 +192,18 @@ struct task_struct *task;
 
 int pix_thread(void *data){
   u8 line, pos, bit;
-  struct task_struct *TSK;
-  struct sched_param PARAM = { .sched_priority = MAX_RT_PRIO - 50 };
-  //struct sched_param PARAM = { .sched_priority = DEFAULT_PRIO };
-  TSK = current;
+  struct task_struct *tsk;
+  // struct sched_param param;
+  // param.sched_priority = MAX_RT_PRIO - 50;
+  // //struct sched_param param = { .sched_priority = DEFAULT_PRIO };
+  tsk = current;
 
-  PARAM.sched_priority = THREAD_PRIORITY;
-  sched_setscheduler(TSK, SCHED_FIFO, &PARAM);
+  sched_set_fifo(tsk); // New scheme, priority == 50
+  // sched_set_fifo_low(tsk); Lowest, priority == 1
+  // sched_set_fifo_normal(tsk); Lower than fifo priority == SCHED_NORMAL
+  
+  // param.sched_priority = THREAD_PRIORITY;
+  // sched_setscheduler(tsk, SCHED_FIFO, &param);
 
   while(1) {
     for(line = 0; line < LINES; line++) {

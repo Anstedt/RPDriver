@@ -1,5 +1,6 @@
 *.~*~
 *.pyc
+*.o.d
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
