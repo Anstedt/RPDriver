@@ -30,3 +30,15 @@ cd /opt/git/RPDriver/timer
 make
 sudo insmod hello.ko
 sudo rmmod hello.ko
+
+### DM
+## simple : http://derekmolloy.ie/writing-a-linux-kernel-module-part-1-introduction/
+Simple module like others
+## char : http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/
+Character device that can be written and read from user space
+Also has udev control for permissions
+## charmutex : http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/
+Same as character device but mutex protected
+## led : http://derekmolloy.ie/kernel-gpio-programming-buttons-and-leds/
+Led control using sysfs and run in a thread. Compiles by setting group access to none.
+Not tested since this IO is for Beagle board NOT PI.
